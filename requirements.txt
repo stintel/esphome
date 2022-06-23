@@ -1,7 +1,7 @@
 voluptuous==0.12.1
 PyYAML==5.4.1
 paho-mqtt==1.5.1
-colorama==0.4.4
+colorama==0.4.5
 tornado==6.1
 protobuf==3.17.3
 tzlocal==2.1
