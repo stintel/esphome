@@ -1,6 +1,14 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
-from esphome.const import CONF_ID, CONF_TYPE, CONF_UUID, CONF_TX_POWER
+from esphome.const import (
+    CONF_ID,
+    CONF_TYPE,
+    CONF_UUID,
+    CONF_TX_POWER,
+    KEY_CORE,
+    KEY_FRAMEWORK_VERSION,
+)
+
 from esphome.core import CORE, TimePeriod
 from esphome.components.esp32 import add_idf_sdkconfig_option
 from esphome.components import esp32_ble
@@ -73,3 +81,6 @@ async def to_code(config):
     if CORE.using_esp_idf:
         add_idf_sdkconfig_option("CONFIG_BT_ENABLED", True)
         add_idf_sdkconfig_option("CONFIG_BT_BLE_42_FEATURES_SUPPORTED", True)
+
+        if CORE.data[KEY_CORE][KEY_FRAMEWORK_VERSION] >= cv.Version(5, 1, 0):
+            cg.add_build_flag("-Wno-narrowing")
